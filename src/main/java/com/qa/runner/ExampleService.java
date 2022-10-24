@@ -1,7 +1,5 @@
 package com.qa.runner;
 
-import java.time.LocalTime;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,10 +7,10 @@ import org.springframework.stereotype.Service;
 public class ExampleService {
 
 	@Autowired
-	private LocalTime dateBean;
+	private int squaredBean;
 
-	public LocalTime getDateBean() {
-		return dateBean;
+	public int getSquaredBean() {
+		return squaredBean;
 	}
 
 }

@@ -14,7 +14,7 @@ public class QaSpring2Application {
 		System.out.println(context.getBean("starter").toString());
 
 		ExampleService es = context.getBean(ExampleService.class);
-		System.out.println(es.getDateBean());
+		System.out.println(es.getSquaredBean());
 
 	}
 

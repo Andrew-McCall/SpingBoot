@@ -2,8 +2,10 @@ package com.qa.runner;
 
 import java.time.LocalTime;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
@@ -25,6 +27,18 @@ public class AppConfig {
 	@Bean
 	public LocalTime getLocalTime() {
 		return LocalTime.now();
+	}
+
+	@Bean
+	@Primary
+	public int squared(int n) {
+		return n * n;
+	}
+
+	@Bean
+	@Qualifier
+	public int n() {
+		return 4;
 	}
 
 }

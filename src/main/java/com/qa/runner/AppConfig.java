@@ -1,14 +1,30 @@
 package com.qa.runner;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
+import java.time.LocalTime;
 
-@Component
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
+@Configuration
 public class AppConfig {
 
+	private Boolean bool = true;
+
 	@Bean
-	public String starter2() {
-		return ("Goodbye World!");
+	@Scope("prototype")
+	public String starter() {
+		bool = !bool;
+		if (bool) {
+			return "Starter!";
+		} else {
+			return "Not Starter!";
+		}
+	}
+
+	@Bean
+	public LocalTime getLocalTime() {
+		return LocalTime.now();
 	}
 
 }

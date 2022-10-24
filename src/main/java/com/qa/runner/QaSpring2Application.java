@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 public class QaSpring2Application {
 
 	public static void main(String[] args) {
-		var context = SpringApplication.run(QaSpring2Application.class, args);
+		ApplicationContext context = SpringApplication.run(QaSpring2Application.class, args);
 
 		String byName = context.getBean("starter").toString();
 		String byType = context.getBean("starter2", String.class);

@@ -1,6 +1,8 @@
 package com.qa.runner;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -12,6 +14,11 @@ import org.springframework.context.annotation.Scope;
 public class AppConfig {
 
 	private Boolean bool = true;
+
+	@Bean
+	public List<Trainer> trainers() {
+		return new ArrayList<Trainer>();
+	}
 
 	@Bean
 	@Scope("prototype")

@@ -8,39 +8,24 @@ import org.springframework.stereotype.Service;
 @Service
 public class TrainerService {
 
-	private boolean validIndex(int index) {
-		return (index >= 0 && index < trainers.size());
-	}
-
 	@Autowired
-	List<Trainer> trainers;
+	TrainerRepo repo;
 
 	public List<Trainer> getAll() {
-		return trainers;
+		return repo.findAll();
 	}
 
-	public Trainer getOne(int index) {
-		if (validIndex(index)) {
-			return trainers.get(index);
-		}
-
-		return null;
-
+	public Trainer getOne(Long index) {
+		return repo.findById(index).orElse(null);
 	}
 
-	public int create(Trainer trainer) {
-		if (trainers.add(trainer)) {
-			return trainers.size() - 1;
-		}
-		return -1;
+	public Trainer create(Trainer trainer) {
+		return repo.save(trainer);
 	}
 
-	public Trainer delete(int index) {
-		if (validIndex(index)) {
-			return trainers.remove(index);
-		}
-
-		return null;
+	public boolean delete(Long index) {
+		repo.deleteById(index);
+		return (!repo.existsById(index));
 	}
 
 }

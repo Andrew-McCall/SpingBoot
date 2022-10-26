@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
+@RequestMapping("/Trainer")
 public class TrainerController {
 
 	@Autowired
@@ -30,12 +31,12 @@ public class TrainerController {
 	}
 
 	@GetMapping("/getOne/{index}")
-	public Trainer getOne(@PathVariable("index") int index) {
+	public Trainer getOne(@PathVariable("index") Long index) {
 		return service.getOne(index);
 	}
 
 	@GetMapping("/getOneByParam")
-	public Trainer getOne(@PathParam("index") Integer index) {
+	public Trainer getOneByParam(@PathParam("index") Long index) {
 		if (index != null) {
 			return service.getOne(index);
 		}
@@ -43,7 +44,7 @@ public class TrainerController {
 	}
 
 	@PostMapping("/create")
-	public int create(@RequestBody Trainer trainer) {
+	public Trainer create(@RequestBody Trainer trainer) {
 		return service.create(trainer);
 	}
 
@@ -56,7 +57,7 @@ public class TrainerController {
 //	}
 
 	@DeleteMapping("/delete/{index}")
-	public Trainer deleteOne(@PathVariable("index") int index) {
+	public Boolean deleteOne(@PathVariable("index") Long index) {
 		return service.delete(index);
 	}
 

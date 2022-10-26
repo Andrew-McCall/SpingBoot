@@ -11,6 +11,10 @@ public class TrainerService {
 	@Autowired
 	TrainerRepo repo;
 
+	public Trainer getOneByEmail(String email) {
+		return repo.getByEmail(email).orElse(null);
+	}
+
 	public List<Trainer> getAll() {
 		return repo.findAll();
 	}
@@ -21,6 +25,16 @@ public class TrainerService {
 
 	public Trainer create(Trainer trainer) {
 		return repo.save(trainer);
+	}
+
+	public Trainer update(Long id, Trainer trainer) {
+		Trainer found = repo.findById(id).orElse(new Trainer());
+
+		found.setAge(trainer.getAge());
+		found.setEmail(trainer.getEmail());
+		found.setFirstName(trainer.getFirstName());
+
+		return repo.save(found);
 	}
 
 	public boolean delete(Long index) {

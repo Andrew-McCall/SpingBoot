@@ -27,12 +27,12 @@ public class TrainerController {
 	}
 
 	@GetMapping("/getAll")
-	public List<Trainer> getAll() {
+	public List<TrainerDTO> getAll() {
 		return service.getAll();
 	}
 
 	@GetMapping("/getOneByEmail/{email}")
-	public Trainer getOneByEmail(@PathVariable String email) {
+	public TrainerDTO getOneByEmail(@PathVariable String email) {
 		return service.getOneByEmail(email);
 	}
 

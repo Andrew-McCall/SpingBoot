@@ -1,6 +1,8 @@
 package com.qa.runner;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,12 +13,18 @@ public class TrainerService {
 	@Autowired
 	TrainerRepo repo;
 
-	public Trainer getOneByEmail(String email) {
-		return repo.getByEmail(email).orElse(null);
+	public TrainerDTO getOneByEmail(String email) {
+		Optional<Trainer> find = repo.getByEmail(email);
+		if (find.isPresent()) {
+			return new TrainerDTO(find.get());
+		}
+		return null;
 	}
 
-	public List<Trainer> getAll() {
-		return repo.findAll();
+	public List<TrainerDTO> getAll() {
+		List<TrainerDTO> output = new ArrayList<TrainerDTO>();
+		repo.findAll().forEach(t -> output.add(new TrainerDTO(t)));
+		return output;
 	}
 
 	public Trainer getOne(Long index) {

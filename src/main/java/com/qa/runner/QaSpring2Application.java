@@ -2,20 +2,19 @@ package com.qa.runner;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+// Scans not needed if in parent package
+@ComponentScan("com.qa")
+@EnableJpaRepositories("com.qa.repos")
+@EntityScan("com.qa.models")
 public class QaSpring2Application {
 
 	public static void main(String[] args) {
-		ApplicationContext context = SpringApplication.run(QaSpring2Application.class, args);
-
-		System.out.println(context.getBean("starter").toString());
-		System.out.println(context.getBean("starter").toString());
-
-		ExampleService es = context.getBean(ExampleService.class);
-		System.out.println(es.getSquaredBean());
-
+		SpringApplication.run(QaSpring2Application.class, args);
 	}
 
 }

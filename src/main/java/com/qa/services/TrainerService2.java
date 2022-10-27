@@ -1,9 +1,11 @@
-package com.qa.runner;
+package com.qa.services;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.qa.models.Trainer;
 
 @Service
 public class TrainerService2 {

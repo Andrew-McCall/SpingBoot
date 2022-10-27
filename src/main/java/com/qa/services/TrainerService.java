@@ -1,4 +1,4 @@
-package com.qa.runner;
+package com.qa.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,11 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.qa.exceptions.TrainerNotFoundException;
+import com.qa.models.Trainer;
+import com.qa.models.TrainerDTO;
+import com.qa.repos.TrainerRepo;
 
 @Service
 public class TrainerService {
@@ -18,7 +23,7 @@ public class TrainerService {
 		if (find.isPresent()) {
 			return new TrainerDTO(find.get());
 		}
-		return null;
+		throw new TrainerNotFoundException();
 	}
 
 	public List<TrainerDTO> getAll() {
@@ -28,11 +33,17 @@ public class TrainerService {
 	}
 
 	public Trainer getOne(Long index) {
-		return repo.findById(index).orElse(null);
+		return repo.findById(index).orElseThrow(TrainerNotFoundException::new);
 	}
 
 	public Trainer create(Trainer trainer) {
 		return repo.save(trainer);
+	}
+
+	public List<Trainer> createMany(List<Trainer> trainers) {
+		List<Trainer> output = new ArrayList<Trainer>();
+		trainers.forEach(t -> output.add(create(t)));
+		return output;
 	}
 
 	public Trainer update(Long id, Trainer trainer) {

@@ -1,4 +1,4 @@
-package com.qa.runner;
+package com.qa.beans;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
+
+import com.qa.models.Trainer;
 
 @Configuration
 public class AppConfig {

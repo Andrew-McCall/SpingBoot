@@ -1,4 +1,4 @@
-package com.qa.runner;
+package com.qa.models;
 
 public class TrainerDTO {
 

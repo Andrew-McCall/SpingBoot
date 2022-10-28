@@ -1,3 +1,3 @@
 DELETE FROM TRAINER;
-INSERT INTO TRAINER (ID, AGE, EMAIL, FIRST_NAME) VALUES ('1' , '20', 'amccall@qa.com', 'Andrew');
-INSERT INTO TRAINER (ID, AGE, EMAIL, FIRST_NAME) VALUES ('2' , '20', 'amccall@qa.com', 'Andrew');
+INSERT INTO TRAINER (AGE, EMAIL, FIRST_NAME) VALUES ('20', 'amccall@qa.com', 'Andrew');
+INSERT INTO TRAINER (AGE, EMAIL, FIRST_NAME) VALUES ('20', 'amccall@qa.com', 'Andrew');

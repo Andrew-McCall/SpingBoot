@@ -20,7 +20,7 @@ import com.qa.models.TrainerDTO;
 import com.qa.services.TrainerService;
 
 @RestController()
-@RequestMapping("/Trainer")
+@RequestMapping("/trainer")
 public class TrainerController {
 
 	@Autowired

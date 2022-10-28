@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.qa.exceptions.TrainerNotFoundException;
 import com.qa.models.Trainer;
 import com.qa.models.TrainerDTO;
 import com.qa.services.TrainerService;
@@ -36,17 +37,17 @@ public class TrainerController {
 	}
 
 	@GetMapping("/getOneByEmail/{email}")
-	public TrainerDTO getOneByEmail(@PathVariable String email) {
+	public TrainerDTO getOneByEmail(@PathVariable String email) throws TrainerNotFoundException {
 		return service.getOneByEmail(email);
 	}
 
 	@GetMapping("/getOne/{index}")
-	public Trainer getOne(@PathVariable("index") Long index) {
+	public Trainer getOne(@PathVariable("index") Long index) throws TrainerNotFoundException {
 		return service.getOne(index);
 	}
 
 	@GetMapping("/getOneByParam")
-	public Trainer getOneByParam(@PathParam("index") Long index) {
+	public Trainer getOneByParam(@PathParam("index") Long index) throws TrainerNotFoundException {
 		if (index != null) {
 			return service.getOne(index);
 		}

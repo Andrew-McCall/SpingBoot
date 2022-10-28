@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Scope;
 import com.qa.models.Trainer;
 
 @Configuration
-@Profile("!test")
-public class AppConfig {
+@Profile("test")
+public class TestAppConfig {
 
 	private Boolean bool = true;
 
@@ -49,7 +49,7 @@ public class AppConfig {
 	@Bean
 	@Qualifier
 	public int n() {
-		return 4;
+		return 154;
 	}
 
 }

@@ -18,7 +18,7 @@ public class TrainerService {
 	@Autowired
 	TrainerRepo repo;
 
-	public TrainerDTO getOneByEmail(String email) {
+	public TrainerDTO getOneByEmail(String email) throws TrainerNotFoundException {
 		Optional<Trainer> find = repo.getByEmail(email);
 		if (find.isPresent()) {
 			return new TrainerDTO(find.get());
@@ -32,7 +32,7 @@ public class TrainerService {
 		return output;
 	}
 
-	public Trainer getOne(Long index) {
+	public Trainer getOne(Long index) throws TrainerNotFoundException {
 		return repo.findById(index).orElseThrow(TrainerNotFoundException::new);
 	}
 

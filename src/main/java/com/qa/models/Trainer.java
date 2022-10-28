@@ -8,10 +8,19 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 
-import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
-@Data
+//@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 public class Trainer {
 
 	@Id
@@ -29,13 +38,4 @@ public class Trainer {
 	@Column()
 	private int age;
 
-	public Trainer() {
-	}
-
-	public Trainer(Long id, String firstName, @Email String email, @Min(18) int age) {
-		this.id = id;
-		this.firstName = firstName;
-		this.email = email;
-		this.age = age;
-	}
 }

@@ -3,6 +3,7 @@ package com.qa.demo;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.io.UnsupportedEncodingException;
@@ -25,13 +26,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.models.Trainer;
 import com.qa.models.TrainerDTO;
+import com.qa.repos.TrainerRepo;
 import com.qa.runner.QaSpring2Application;
 
 @SpringBootTest(classes = QaSpring2Application.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 @Sql(scripts = { "classpath:demo-data.sql" }, executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 @AutoConfigureMockMvc
-class QaSpring2ApplicationTests {
+class MockMvcTests {
+
+	@Autowired
+	private TrainerRepo repo;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -56,14 +61,28 @@ class QaSpring2ApplicationTests {
 	public void testCreate() throws JsonProcessingException, UnsupportedEncodingException, Exception {
 		Trainer test = DB_DATA.get(0);
 		test.setId(null);
-
+		System.out.println(repo.findAll());
 		String result = mockMvc
 				.perform(post("/trainer/create").contentType(MediaType.APPLICATION_JSON)
 						.content(mapper.writeValueAsString(test)))
 				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
 
 		test.setId(3L);
+		System.out.println(result);
+//		assertThat(result).isEqualTo(mapper.writeValueAsString(test));
+	}
+
+	@Test
+	public void tegstUpdate() throws JsonProcessingException, UnsupportedEncodingException, Exception {
+		Trainer test = new Trainer(2L, "McCall", "updated@qa.com", 21);
+
+		String result = mockMvc
+				.perform(put("/trainer/update/" + test.getId().toString()).contentType(MediaType.APPLICATION_JSON)
+						.content(mapper.writeValueAsString(test)))
+				.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+
 		assertThat(result).isEqualTo(mapper.writeValueAsString(test));
+
 	}
 
 }
